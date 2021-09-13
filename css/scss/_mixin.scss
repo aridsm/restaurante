@@ -1,0 +1,83 @@
+// cores e fontes
+
+$fundo: #e1d7a3;
+$branco: #e3e1d3;
+$preto: #292420;
+$cor-borda: #29242086;
+$borda-branca: 1px solid rgba(255, 255, 255, 0.3);
+$gradiente: radial-gradient(50% 50% at 50% 50%, #fdf9e3 0%, $fundo 100%);
+$gradiente-section: radial-gradient(
+  50% 50% at 50% 50%,
+  #fff7d0 0%,
+  $fundo 100%
+);
+$borda: 1px solid $cor-borda;
+
+$fonte-1: "Inconsolata", monospace;
+$fonte-2: "Parisienne", cursive;
+
+// mixin tipografia
+
+@mixin mono($mono) {
+  font-family: $fonte-1;
+  color: $preto;
+  @if $mono == mono-titulo {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 40px;
+  } @else if $mono == mono-texto {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+  } @else if $mono == mono-link {
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+}
+
+@mixin cursive {
+  font-family: $fonte-2;
+  font-weight: 400;
+  text-transform: none;
+  margin-top: -10px;
+  font-size: 30px;
+}
+
+/* responsivo */
+
+@mixin d($device) {
+  @if $device == mobile {
+    @media (max-width: 650px) {
+      @content;
+    }
+  } @else if $device == tablet {
+    @media (max-width: 950px) {
+      @content;
+    }
+  }
+}
+
+/* links */
+
+@mixin seta-links {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -11px;
+  width: 50px;
+  height: 50px;
+  z-index: 5000;
+  background-image: url("../../img/seta.svg");
+  background-size: 50px;
+  transform: rotate(180deg);
+  @include d(tablet) {
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
+    right: -40px;
+    top: -3px;
+  }
+}

@@ -1,0 +1,1127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input {
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  display: inline-block;
+}
+
+label {
+  visibility: hidden;
+  position: absolute;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  filter: contrast(0.85);
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  font-family: inherit;
+  color: inherit;
+}
+
+body {
+  background-color: $fundo;
+  position: relative;
+  z-index: -1000;
+  &:before {
+    content: "";
+    position: fixed;
+    left: 20px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 5000;
+    border-right: $borda;
+    @include d(tablet) {
+      left: 0px;
+    }
+  }
+  &:after {
+    content: "";
+    position: fixed;
+    right: 20px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 5000;
+    border-left: $borda;
+    @include d(tablet) {
+      right: 0px;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 15px;
+    background: $cor-borda;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $preto;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $branco;
+    border: 2px solid $preto;
+  }
+}
+
+button {
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 960px;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block !important;
+  }
+}
+
+.section-border {
+  width: 100%;
+  border-top: $borda;
+  border-bottom: $borda;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.section-border-interna {
+  padding-left: 30px;
+  padding-right: 30px;
+  border-top: $borda;
+  border-bottom: $borda;
+  @include d(tablet) {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+.links-seta {
+  @include mono(mono-link);
+  position: relative;
+  &:after {
+    @include seta-links;
+    transition: all 0.6s ease;
+  }
+  &:hover:after {
+    transform: rotate(0);
+  }
+  @include d(tablet) {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+::selection {
+  background: rgb(82, 78, 55);
+  color: $branco;
+}
+/* header */
+
+.header-sup {
+  background-color: $preto;
+  height: 25px;
+  @include mono(mono-texto);
+  font-size: 16px;
+  color: $branco;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .data-hoje {
+    @include d(tablet) {
+      display: none;
+    }
+  }
+  #aberto-agora {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    display: block;
+    @include d(tablet) {
+      text-align: right;
+      margin-right: 20px;
+    }
+  }
+  a {
+    position: relative;
+    z-index: 1;
+    @include d(tablet) {
+      display: none;
+    }
+  }
+}
+
+header {
+  z-index: 99999;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  color: $preto;
+  transition: all 0.3s ease-in-out;
+  .header-down {
+    @include mono(mono-texto);
+    font-weight: 700;
+    border-bottom: $borda;
+    position: relative;
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 200px 1fr 1fr;
+      grid-template-areas: "cardapio reserva . local contato";
+      justify-items: space-between;
+      li {
+        text-align: center;
+        align-self: center;
+        height: 100%;
+        margin: 10px 0;
+        &:nth-of-type(1) {
+          grid-area: cardapio;
+        }
+        &:nth-of-type(2) {
+          border-left: $borda;
+          border-right: $borda;
+          grid-area: reserva;
+        }
+        &:nth-of-type(3) {
+          grid-area: local;
+          border-left: $borda;
+          border-right: $borda;
+        }
+        &:nth-of-type(4) {
+          grid-area: contato;
+        }
+        a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          &:hover {
+            background: $preto;
+            color: $branco;
+          }
+        }
+      }
+      @include d(tablet) {
+        display: block;
+        visibility: hidden;
+        overflow: hidden;
+        height: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: #292420ee;
+        backdrop-filter: blur(8px);
+        position: absolute;
+        left: 0;
+        top: 80px;
+        transition: all 0.3s linear;
+        li {
+          font-size: 24px;
+          opacity: 0;
+          transition: all 0.7s linear;
+        }
+      }
+      &.header-mobile-ativo {
+        height: calc(100vh - 70px);
+        visibility: visible;
+        li {
+          border: none !important;
+          width: 100%;
+          color: $branco;
+          opacity: 1;
+        }
+      }
+    }
+    @include d(tablet) {
+      display: flex;
+      padding: 40px 20px;
+    }
+  }
+  #logo {
+    @include mono(mono-titulo);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    &:hover {
+      background: $preto;
+      color: $branco;
+    }
+  }
+}
+
+#btn-menu {
+  display: none;
+  cursor: pointer;
+  @include d(tablet) {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+    top: 20px;
+  }
+}
+
+header.header-scroll {
+  background: $preto;
+  border-bottom: $borda-branca;
+  .container {
+    color: $branco;
+    li:nth-of-type(3) a {
+      color: $branco;
+    }
+    li:nth-of-type(2) {
+      border-left: $borda-branca;
+      border-right: $borda-branca;
+    }
+    li:nth-of-type(3) {
+      border-left: $borda-branca;
+      border-right: $borda-branca;
+    }
+    li {
+      a:hover {
+        background: $fundo;
+        color: $preto;
+      }
+      @include d(tablet) {
+        border: none !important;
+      }
+    }
+  }
+  #logo {
+    color: $branco;
+    &:hover {
+      background: $fundo;
+      color: $preto;
+    }
+  }
+  #btn-menu {
+    color: $branco;
+  }
+}
+
+/* pagina de entrada */
+
+.pag-de-entrada {
+  text-align: center;
+  background: $gradiente;
+  padding-top: 70px;
+  padding-bottom: 110px;
+  position: relative;
+  .container-entrada {
+    width: 750px;
+    margin: 0 auto;
+    position: relative;
+    @include d(tablet) {
+      width: 360px;
+      display: flex;
+      flex-direction: column !important;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .links-seta {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    @include d(tablet) {
+      position: relative;
+      order: 3;
+      width: fit-content;
+      left: -30px;
+    }
+    @include d(mobile) {
+      left: -20px;
+    }
+  }
+  #img-inicio {
+    width: 380px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border: 6px solid $preto;
+    margin-left: auto;
+    position: relative;
+    z-index: 0;
+    padding: 5px;
+    img {
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+    }
+    @include d(tablet) {
+      width: 360px;
+    }
+    @include d(mobile) {
+      margin: 0 auto;
+      width: 300px;
+    }
+  }
+  h1 {
+    @include mono(mono-titulo);
+    font-size: 64px;
+    text-align: right;
+    position: absolute;
+    z-index: 1;
+    left: -90px;
+    top: 25%;
+    height: fit-content;
+    line-height: 1.3;
+    color: $preto;
+    span {
+      position: relative;
+      right: -90px;
+      font-family: $fonte-2;
+      font-size: 80px;
+      text-transform: none;
+      color: $branco;
+      background: $preto;
+      font-weight: 400;
+      padding: 0px 20px;
+      @include d(tablet) {
+        font-size: 55px;
+        right: 0;
+      }
+      @include d(mobile) {
+        padding: 0px 10px;
+      }
+    }
+    @include d(tablet) {
+      position: relative;
+      order: 2;
+      font-size: 48px;
+      left: 0;
+      top: 0;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  }
+  .frase-lateral {
+    @include mono(mono-texto);
+    font-weight: 700;
+    font-size: 20px;
+    word-spacing: 5px;
+    color: $cor-borda;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 50%;
+    left: -80px;
+    @include d(tablet) {
+      left: -90px;
+      font-size: 16px;
+      top: 40.5%;
+    }
+    @include d(mobile) {
+      display: none;
+    }
+  }
+  @include d(tablet) {
+    padding-bottom: 70px;
+  }
+}
+
+.icones-redes {
+  color: $cor-borda;
+  position: absolute;
+  top: 45%;
+  right: 50px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  a {
+    width: 25px;
+    img {
+      border-radius: 0;
+      border: none;
+      width: 100%;
+    }
+    + a {
+      margin-top: 15px;
+    }
+  }
+  @include d(tablet) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: 20px;
+    a + a {
+      margin-top: 0;
+      margin-left: 40px;
+    }
+  }
+}
+/* principal sobre */
+
+.section-sobre {
+  display: flex;
+  .img-sobre {
+    width: 50%;
+    display: inline-block;
+    padding: 5px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left;
+    }
+  }
+  .container-sobre {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background: $gradiente-section;
+    border-left: $borda;
+    .titulos-sobre {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: $borda;
+      h2 {
+        @include mono(mono-titulo);
+      }
+      p {
+        @include cursive;
+      }
+    }
+    .texto-sobre {
+      padding: 70px;
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      p {
+        @include mono(mono-texto);
+      }
+      a {
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 70px;
+      }
+    }
+  }
+  @include d(tablet) {
+    flex-direction: column;
+    .img-sobre {
+      width: 100%;
+      height: 300px;
+    }
+    .texto-sobre {
+      padding: 40px !important;
+      a {
+        text-align: center;
+        position: relative;
+        left: -20px;
+      }
+    }
+  }
+}
+
+/* pratos separador */
+
+.container-pratos {
+  display: flex;
+  justify-content: space-between;
+  border: none;
+  margin-right: 30px;
+  margin-left: 30px;
+  background-color: $preto;
+  position: relative;
+  z-index: 1;
+  img {
+    width: 30%;
+    &:nth-of-type(odd) {
+      border-bottom-left-radius: 340px;
+      border-bottom-right-radius: 340px;
+      margin-bottom: 20px;
+    }
+    &:nth-of-type(even) {
+      border-top-left-radius: 340px;
+      border-top-right-radius: 340px;
+      margin-top: 20px;
+    }
+    @include d(mobile) {
+      width: 33%;
+    }
+  }
+  @include d(tablet) {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+}
+
+/* cardapio */
+
+.cardapio-section {
+  padding-top: 110px;
+  padding-bottom: 110px;
+  background: $gradiente-section;
+  overflow: hidden;
+  .container {
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      right: 0;
+      display: block;
+      top: -200px;
+      width: 200px;
+      height: 200px;
+      background: url("../../img/listras.svg");
+      background-size: 200px;
+      transform: rotate(230deg);
+    }
+    h2 {
+      @include mono(mono-titulo);
+    }
+    p {
+      @include cursive;
+    }
+    .btns-cardapio {
+      @include mono(mono-texto);
+      width: 100%;
+      margin-top: 70px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        @include mono(mono-texto);
+        font-weight: 700;
+        position: relative;
+        padding: 20px;
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        border-radius: 0;
+        &:hover {
+          border-top: 3px solid $preto;
+          border-bottom: 3px solid $preto;
+          @include d(mobile) {
+            border-left: 3px solid $preto;
+            border-right: 3px solid $preto;
+          }
+        }
+      }
+      .btn-cardapio-ativo {
+        background: $preto;
+        color: $branco;
+        position: relative;
+        &:after {
+          content: "";
+          position: absolute;
+          right: 0px;
+          left: 0px;
+          display: block;
+          margin: 0 auto;
+          top: -40px;
+          width: 30px;
+          height: 30px;
+          background: url("../../img/seta.svg");
+          background-size: 30px;
+          z-index: 5;
+          transform: rotate(-90deg);
+          @include d(mobile) {
+            content: none;
+          }
+        }
+      }
+      @include d(mobile) {
+        flex-wrap: wrap;
+        button {
+          width: 50%;
+        }
+      }
+    }
+    .container-cardapio {
+      background: $preto;
+      padding: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      position: relative;
+      .cardapios {
+        width: 100%;
+        display: none;
+        justify-content: space-between;
+        position: relative;
+      }
+      .cardapio-ativo {
+        display: flex;
+        @include d(tablet) {
+          flex-direction: column;
+        }
+      }
+      .opcoes-cardapio {
+        h3 {
+          @include cursive;
+          font-size: 70px;
+          color: $branco;
+          margin-bottom: 40px;
+          line-height: 0.7;
+          @include d(tablet) {
+            text-align: center;
+            font-size: 50px;
+          }
+        }
+        ul {
+          display: flex;
+          flex-direction: column;
+          li {
+            @include mono(mono-texto);
+            color: $branco;
+            display: block;
+            @include d(tablet) {
+              margin: 0 auto;
+            }
+            > span:first-of-type:after {
+              content: " .............. ";
+              @include d(tablet) {
+                content: " ........................... ";
+              }
+              @include d(mobile) {
+                content: " ..... ";
+              }
+            }
+            + li {
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+      @include d(mobile) {
+        padding: 50px 30px;
+      }
+    }
+    .imgs-cardapio {
+      position: relative;
+      height: 540px;
+      overflow: auto;
+      img {
+        max-width: 320px;
+      }
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        background: $cor-borda;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.158);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $branco;
+      }
+      @include d(tablet) {
+        display: flex;
+        height: auto;
+        margin-top: 40px;
+        img {
+          width: 320px;
+        }
+      }
+      @include d(mobile) {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/* faça sua reserva */
+
+.section-reserva {
+  border-top: none !important;
+  display: flex;
+  .faca-sua-reserva {
+    width: 50%;
+    border-right: $borda;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    text-align: center;
+    background: $gradiente-section;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h2 {
+      @include mono(mono-titulo);
+      width: fit-content;
+      margin: 0 auto;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: block;
+        top: -130px;
+        width: 100px;
+        height: 100px;
+        background: url("../../img/seta.svg");
+        background-size: 100px;
+        transform: rotate(-90deg);
+      }
+      @include d(tablet) {
+        margin-bottom: 40px;
+      }
+    }
+    h3 {
+      @include mono(mono-texto);
+      font-weight: 700;
+      span {
+        border-bottom: 2px solid $preto;
+        padding-bottom: 5px;
+      }
+    }
+    @include d(tablet) {
+      width: 100%;
+      border-bottom: $borda;
+    }
+  }
+  form {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "nome sobrenome" "email email" "telefone telefone" "data hora" "submit submit";
+    input,
+    select {
+      border-radius: 0;
+      height: 80px;
+      background: transparent;
+      padding: 20px;
+      width: 100%;
+      @include mono(mono-texto);
+      &::placeholder {
+        @include mono(mono-texto);
+        color: $cor-borda;
+        text-align: center;
+      }
+      &:focus {
+        outline: 2px solid $preto;
+      }
+    }
+    #nome {
+      grid-area: nome;
+    }
+    #sobrenome {
+      grid-area: sobrenome;
+      border-left: $borda;
+    }
+    #email {
+      grid-area: email;
+      border-top: $borda;
+      border-bottom: $borda;
+    }
+    #telefone {
+      grid-area: telefone;
+    }
+    #data {
+      grid-area: data;
+      border-top: $borda;
+      border-bottom: $borda;
+    }
+    #hora {
+      grid-area: hora;
+    }
+    #submit {
+      grid-area: submit;
+      cursor: pointer;
+      background: $preto;
+      @include mono(mono-link);
+      color: $branco;
+      transition: all 0.6s ease;
+      &:hover {
+        background: $fundo;
+        color: $preto;
+      }
+    }
+    @include d(mobile) {
+      grid-template-columns: auto;
+      grid-template-areas: "nome" "sobrenome" "email" "telefone" "data" "hora" "submit";
+      #nome {
+        border-bottom: $borda;
+      }
+      #hora {
+        border: none;
+      }
+    }
+  }
+  @include d(tablet) {
+    flex-direction: column;
+  }
+}
+
+/* mapa */
+
+.mapa {
+  iframe {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: block;
+    border-bottom: $borda;
+  }
+  &.section-border {
+    border-top: none !important;
+  }
+  .dados-contato {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    .entre-em-contato {
+      display: inline-block;
+      background: $gradiente-section;
+      h2 {
+        @include mono(mono-titulo);
+        margin-bottom: 70px;
+      }
+    }
+
+    .contato-container {
+      background: $preto;
+      @include mono(mono-texto);
+      color: $branco;
+      width: fit-content;
+      padding: 40px 60px;
+      padding-top: 60px;
+      text-align: center;
+      margin-top: -130px;
+      margin-bottom: 0px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      @include d(tablet) {
+        margin-top: 40px;
+        margin-bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        span + span {
+          margin-top: 20px;
+        }
+      }
+    }
+    @include d(tablet) {
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  a {
+    @include d(tablet) {
+      position: relative;
+      left: -20px;
+    }
+  }
+}
+
+/* footer */
+
+footer {
+  position: relative;
+  z-index: 9999;
+  background: $preto;
+  display: block;
+  padding-left: 30px;
+  padding-right: 30px;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 9999;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    @include d(tablet) {
+      left: 0;
+    }
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 6000;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    @include d(tablet) {
+      right: 0;
+    }
+  }
+  .container {
+    .sup-footer {
+      display: flex;
+      justify-content: space-between;
+      nav {
+        padding-top: 40px;
+        padding-bottom: 10px;
+        flex: 1;
+        a {
+          @include mono(mono-texto);
+          color: $branco;
+          display: block;
+          + a {
+            margin-top: 20px;
+          }
+        }
+      }
+      .logo-footer {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        flex: 1;
+        justify-self: center;
+        @include mono(mono-titulo);
+        color: $branco;
+        text-align: center;
+        border-left: $borda-branca;
+        border-right: $borda-branca;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include d(tablet) {
+          margin-top: 30px;
+          margin-bottom: 10px;
+          border: none;
+          border-top: $borda-branca;
+          border-bottom: $borda-branca;
+        }
+      }
+      .contato-footer {
+        padding-top: 40px;
+        padding-bottom: 10px;
+
+        flex: 1;
+        @include mono(mono-texto);
+        color: $branco;
+        span {
+          display: block;
+          text-align: right;
+          + span {
+            margin-top: 20px;
+          }
+          @include d(tablet) {
+            text-align: center;
+          }
+        }
+        nav {
+          text-align: right;
+          padding-right: 0;
+          a {
+            display: inline-block;
+            img {
+              width: 25px;
+            }
+            + a {
+              margin-left: 10px;
+            }
+          }
+          @include d(tablet) {
+            text-align: center;
+          }
+        }
+      }
+      @include d(tablet) {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  }
+  .copy {
+    border-top: $borda-branca;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 20px;
+      padding-left: 20px;
+      @include mono(mono-texto);
+      color: $branco;
+      @include d(tablet) {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+::-webkit-datetime-edit {
+  text-align: center;
+}
+
+::-webkit-datetime-edit-text {
+  color: $cor-borda;
+  padding: 5px;
+}
+
+::-webkit-datetime-edit-month-field {
+  color: $cor-borda;
+}
+::-webkit-datetime-edit-day-field {
+  color: $cor-borda;
+}
+::-webkit-datetime-edit-year-field {
+  color: $cor-borda;
+}
+
+::-webkit-calendar-picker-indicator {
+  display: block;
+}
+
+option {
+  background: $preto;
+  color: $branco;
+}
