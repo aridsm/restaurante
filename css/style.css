@@ -157,7 +157,7 @@ ul li {
   width: 50px;
   height: 50px;
   z-index: 5000;
-  background-image: url("../seta.svg");
+  background-image: url("../img/seta.svg");
   background-size: 50px;
   transform: rotate(180deg);
   transition: all 0.6s ease;
@@ -1489,31 +1489,6 @@ footer .copy .container {
   footer .copy .container {
     font-size: 14px;
   }
-}
-
-::-webkit-datetime-edit {
-  text-align: center;
-}
-
-::-webkit-datetime-edit-text {
-  color: #29242086;
-  padding: 5px;
-}
-
-::-webkit-datetime-edit-month-field {
-  color: #29242086;
-}
-
-::-webkit-datetime-edit-day-field {
-  color: #29242086;
-}
-
-::-webkit-datetime-edit-year-field {
-  color: #29242086;
-}
-
-::-webkit-calendar-picker-indicator {
-  display: block;
 }
 
 option {
