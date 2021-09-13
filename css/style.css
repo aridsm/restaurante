@@ -157,7 +157,7 @@ ul li {
   width: 50px;
   height: 50px;
   z-index: 5000;
-  background-image: url("../../img/seta.svg");
+  background-image: url("../img/seta.svg");
   background-size: 50px;
   transform: rotate(180deg);
   transition: all 0.6s ease;
@@ -874,7 +874,7 @@ header.header-scroll #btn-menu {
   top: -40px;
   width: 30px;
   height: 30px;
-  background: url("../../img/seta.svg");
+  background: url("../img/seta.svg");
   background-size: 30px;
   z-index: 5;
   transform: rotate(-90deg);
@@ -961,18 +961,36 @@ header.header-scroll #btn-menu {
   }
 }
 
-.cardapio-section .container .container-cardapio .opcoes-cardapio ul li > span:first-of-type:after {
+.cardapio-section
+  .container
+  .container-cardapio
+  .opcoes-cardapio
+  ul
+  li
+  > span:first-of-type:after {
   content: " .............. ";
 }
 
 @media (max-width: 950px) {
-  .cardapio-section .container .container-cardapio .opcoes-cardapio ul li > span:first-of-type:after {
+  .cardapio-section
+    .container
+    .container-cardapio
+    .opcoes-cardapio
+    ul
+    li
+    > span:first-of-type:after {
     content: " ........................... ";
   }
 }
 
 @media (max-width: 650px) {
-  .cardapio-section .container .container-cardapio .opcoes-cardapio ul li > span:first-of-type:after {
+  .cardapio-section
+    .container
+    .container-cardapio
+    .opcoes-cardapio
+    ul
+    li
+    > span:first-of-type:after {
     content: " ..... ";
   }
 }
@@ -1067,7 +1085,7 @@ header.header-scroll #btn-menu {
   top: -130px;
   width: 100px;
   height: 100px;
-  background: url("../../img/seta.svg");
+  background: url("../img/seta.svg");
   background-size: 100px;
   transform: rotate(-90deg);
 }
