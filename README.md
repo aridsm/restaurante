@@ -1,3 +1,5 @@
 # Restaurante
+
+Landing page de um restaurante fictício.
  
-https://aridsm.github.io/-Restaurante-/
+https://aridsm.github.io/restaurante/
